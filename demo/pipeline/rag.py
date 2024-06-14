@@ -79,9 +79,9 @@ async def generation_with_knowledge_retrieval(
     fmt_qa_prompt = PromptTemplate(qa_template).format(
         context_str=context_str, query_str=query_str
     )
-    # print(fmt_qa_prompt)
     ret = await llm.acomplete(fmt_qa_prompt)
     if progress:
         progress.update(1)
+    ret["context_str"] = context_str
     return ret
 
